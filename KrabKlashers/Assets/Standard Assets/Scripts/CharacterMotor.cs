@@ -678,10 +678,10 @@ public class CharacterMotor : MonoBehaviour
 		Vector3 syncVelocity = Vector3.zero;
 		if (stream.isWriting)
 		{
-			syncPosition = rigidbody.position;
+			syncPosition = transform.position;
 			stream.Serialize(ref syncPosition);
 			
-			syncVelocity = rigidbody.velocity;
+			syncVelocity = movement.velocity;
 			stream.Serialize(ref syncVelocity);
 		}
 		else
@@ -694,13 +694,13 @@ public class CharacterMotor : MonoBehaviour
 			lastSynchronizationTime = Time.time;
 			
 			syncEndPosition = syncPosition + syncVelocity * syncDelay;
-			syncStartPosition = rigidbody.position;
+			syncStartPosition = transform.position;
 		}
 	}
 
 	private void SyncedMovement()
 	{
 		syncTime += Time.deltaTime;
-		rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
+		transform.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
 	}
 }
