@@ -195,7 +195,7 @@ public class CharacterMotor : MonoBehaviour
         controller = GetComponent<CharacterController>();
         tr = transform;
     }
-
+	
     private void UpdateFunction()
     {
 		if(!networkView.isMine){
