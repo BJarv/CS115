@@ -25,6 +25,9 @@ public class CharacterMotor : MonoBehaviour
     [System.NonSerialized]
     public bool inputJump = false;
 
+	[System.NonSerialized]
+	public bool inputFire1 = false;
+
     [System.Serializable]
     public class CharacterMotorMovement
     {
