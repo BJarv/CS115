@@ -19,6 +19,12 @@ public class FPSInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		//ATTACK, DASH, START, AND SCORE INPUTS
+		//if(Input.GetButton ("Fire1") || Input.GetAxis ("Triggers") > 0.1) Debug.Log ("ATTACK");
+		//if(Input.GetButton ("Fire2") || Input.GetAxis ("Triggers") < 0) Debug.Log ("DASH");
+		//if(Input.GetButton ("Start")) Debug.Log ("PAUSE");
+		//if(Input.GetButton ("Score")) Debug.Log ("SCOREBOARD");
+
         // Get the input vector from kayboard or analog stick
         Vector3 directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
