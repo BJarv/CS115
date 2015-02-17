@@ -9,6 +9,7 @@ using System.Collections.Generic;
 
 public class CharacterMotor : MonoBehaviour
 {
+	Animator anim;
     // Does this script currently respond to input?
     bool canControl = true;
     bool useFixedUpdate = true;
@@ -195,6 +196,7 @@ public class CharacterMotor : MonoBehaviour
 
     void Awake()
     {
+		anim = GetComponent <Animator> ();
         controller = GetComponent<CharacterController>();
         tr = transform;
     }
@@ -326,6 +328,7 @@ public class CharacterMotor : MonoBehaviour
         {
             grounded = true;
             jumping.jumping = false;
+			anim.SetBool ("isJumping", false);
             SubtractNewPlatformVelocity();
 
             SendMessage("OnLand", SendMessageOptions.DontRequireReceiver);
@@ -347,8 +350,16 @@ public class CharacterMotor : MonoBehaviour
 
     void FixedUpdate()
     {
+
+		/*if (IsJumping ()) {
+			anim.SetBool ("isJumping", true);
+		} else
+			anim.SetBool ("isJumping", false);
+		*/
         if(movingPlatform.enabled)
         {
+
+
             if(movingPlatform.activePlatform != null)
             {
                 if(!movingPlatform.newPlatform)
@@ -480,6 +491,9 @@ public class CharacterMotor : MonoBehaviour
             {
                 grounded = false;
                 jumping.jumping = true;
+
+				anim.SetBool ("isJumping", true);
+
                 jumping.lastStartTime = Time.time;
                 jumping.lastButtonDownTime = -100;
                 jumping.holdingJumpButton = true;
