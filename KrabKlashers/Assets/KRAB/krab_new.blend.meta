@@ -42,6 +42,7 @@ ModelImporter:
     7400006: attack_one_side
     7400008: jump
     7400010: movement
+    7400012: jump_faster
     9500000: //RootNode
     13700000: Cube_006
   materials:
