@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MainMenuVik : MonoBehaviour
 {
+	public GameObject menu;
 
     void Awake()
     {
@@ -23,17 +24,22 @@ public class MainMenuVik : MonoBehaviour
     private string roomName = "myRoom";
     private Vector2 scrollPos = Vector2.zero;
 
+	//void Update()
     void OnGUI()
     {
         if (!PhotonNetwork.connected)
         {
             ShowConnectingGUI();
-            return;   //Wait for a connection
+			return;
+            //menu.SetActive(false);   //Wait for a connection
         }
 
 
         if (PhotonNetwork.room != null)
-            return; //Only when we're not in a Room
+			return;
+			//menu.SetActive(false); //Only when we're not in a Room
+		//else
+			//menu.SetActive(true);
 
 
         GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 300) / 2, 400, 300));
@@ -110,7 +116,7 @@ public class MainMenuVik : MonoBehaviour
             }
             GUILayout.EndScrollView();
         }
-
+	
         GUILayout.EndArea();
     }
 
@@ -120,7 +126,7 @@ public class MainMenuVik : MonoBehaviour
         GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 300) / 2, 400, 300));
 
         GUILayout.Label("Connecting to Photon server.");
-        GUILayout.Label("Hint: This demo uses a settings file and logs the server address to the console.");
+        //GUILayout.Label("Hint: This demo uses a settings file and logs the server address to the console.");
 
         GUILayout.EndArea();
     }
