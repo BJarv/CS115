@@ -5,6 +5,10 @@ public delegate void JumpDelegate ();
 
 public class ThirdPersonControllerNET : MonoBehaviour
 {
+	bool fire1OnCD = false;
+	float fire1CD = 1f;
+	public InAttackRange range;
+
 	public Rigidbody target;
 		// The object we're steering
 	public float speed = 1.0f, walkSpeedDownscale = 2.0f, turnSpeed = 2.0f, mouseTurnSpeed = 0.3f, jumpSpeed = 1.0f;
@@ -35,8 +39,8 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	
 	private bool grounded, walking;
 
-    private bool isRemotePlayer = true;
-	
+	private bool isRemotePlayer = true;
+
 	public bool Grounded
 	// Make our grounded status available for other components
 	{
@@ -80,7 +84,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			enabled = false;
 			return;
 		}
-
+		range = transform.Find ("Camera/AttackRange").GetComponent<InAttackRange>();
 		target.freezeRotation = true;
 			// We will be controlling the rotation of the target, so we tell the physics system to leave it be
 		walking = false;
@@ -91,6 +95,12 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	// Handle rotation here to ensure smooth application.
 	{
         if (isRemotePlayer) return;
+
+		if(Input.GetMouseButtonDown(0) && attackable()) {
+			fire1OnCD = true;
+			StartCoroutine("fire1OffCD");
+			Fire1 ();
+		}
 
 		float rotationAmount;
 		
@@ -227,5 +237,43 @@ public class ThirdPersonControllerNET : MonoBehaviour
 		Gizmos.color = grounded ? Color.blue : Color.red;
 		Gizmos.DrawLine (target.transform.position + target.transform.up * -groundedCheckOffset,
 			target.transform.position + target.transform.up * -(groundedCheckOffset + groundedDistance));
+	}
+
+
+
+	bool attackable() {
+		if (fire1OnCD) { //add any cooldowns or other restrictions to attack here
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	IEnumerator fire1OffCD() {
+		yield return new WaitForSeconds(fire1CD);
+		fire1OnCD = false;
+	}
+
+
+	void Fire1() {
+		RaycastHit hit = range.rayCheck();
+		Debug.Log ("in fire1");
+		if(range.colliding){ //something is in range
+			Debug.Log ("In colliding");
+			
+			if(hit.collider.tag == "wall") { //object is wall
+				//play wall hit noise
+				//Debug.Log ("In wall");
+				
+			} else if(hit.collider.tag == "Player") { //if object hit is enemy
+				//play player hit noise
+				Debug.Log (hit.transform.gameObject.name + " about to take damage");
+				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f);
+			}
+			
+		} else {
+			//Debug.Log ("In wiff");
+			//play wiff noise
+		}
 	}
 }

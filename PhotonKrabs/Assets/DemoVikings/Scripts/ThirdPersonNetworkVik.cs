@@ -7,9 +7,13 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
     ThirdPersonCameraNET cameraScript;
     ThirdPersonControllerNET controllerScript;
     private bool appliedInitialUpdate;
+	public Camera cam;
+	public GameManagerVik gameMan;
 
     void Awake()
     {
+		//cam = transform.Find("Camera").GetComponent<Camera>();
+		gameMan = GameObject.Find ("Code").GetComponent<GameManagerVik>();
         cameraScript = GetComponent<ThirdPersonCameraNET>();
         controllerScript = GetComponent<ThirdPersonControllerNET>();
 
@@ -22,15 +26,23 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
             //MINE: local player, simply enable the local scripts
             cameraScript.enabled = true;
             controllerScript.enabled = true;
-            Camera.main.transform.parent = transform;
-            Camera.main.transform.localPosition = new Vector3(0, 2, -10);
-            Camera.main.transform.localEulerAngles = new Vector3(10, 0, 0);
-
-        }
+			cam.gameObject.SetActive (true);
+			GetComponent<MouseLook>().enabled = true;
+			cam.gameObject.GetComponent<MouseLook>().enabled = true;
+			gameMan.mainCamObj.SetActive (false);
+            //Camera.main.transform.parent = transform;
+            //Camera.main.transform.localPosition = new Vector3(0, 2, -10);
+            //Camera.main.transform.localEulerAngles = new Vector3(10, 0, 0);
+			cam.transform.localPosition = new Vector3(0, 2, -10);
+			cam.transform.localEulerAngles = new Vector3(10, 0, 0);
+			
+		}
         else
         {           
             cameraScript.enabled = false;
             controllerScript.enabled = true;
+			GetComponent<MouseLook>().enabled = false;//this is being set somewhere else but it wasnt working so I added this.
+			transform.Find("Camera").GetComponent<MouseLook>().enabled = false;
 
         }
         controllerScript.SetIsRemotePlayer(!photonView.isMine);
@@ -88,8 +100,8 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
 
         //disable the axe and shield meshrenderers based on the instantiate data
         MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
-        rens[0].enabled = mybools[0];//Axe
-        rens[1].enabled = mybools[1];//Shield
+        //rens[0].enabled = mybools[0];//Axe
+        //rens[1].enabled = mybools[1];//Shield
 
     }
 

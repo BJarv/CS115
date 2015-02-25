@@ -7,8 +7,10 @@ public class GameManagerVik : Photon.MonoBehaviour {
     // read the documentation for info how to spawn dynamically loaded game objects at runtime (not using Resources folders)
     public string playerPrefabName = "Charprefab";
 
-	public Game game;
-
+	Game game;
+	public float respawnTimer = 3f;
+	public GameObject mainCamObj;
+	public Camera mainCam;
 
 	void Start() {
 		game = GetComponent<Game>();
@@ -33,8 +35,8 @@ public class GameManagerVik : Photon.MonoBehaviour {
 
     void StartGame()
     {
-        Camera.main.farClipPlane = 1000; //Main menu set this to 0.4 for a nicer BG    
-
+        mainCam.farClipPlane = 1000; //Main menu set this to 0.4 for a nicer BG    
+		/*
         //prepare instantiation data for the viking: Randomly diable the axe and/or shield
         bool[] enabledRenderers = new bool[2];
         enabledRenderers[0] = Random.Range(0,2)==0;//Axe
@@ -45,11 +47,38 @@ public class GameManagerVik : Photon.MonoBehaviour {
 
         // Spawn our local player
         PhotonNetwork.Instantiate(this.playerPrefabName, game.getSpawn(), Quaternion.identity, 0, objs);
+        */
+		SpawnPlayer ();
     }
 
-    void OnGUI()
-    {
-        if (PhotonNetwork.room == null) return; //Only display this GUI when inside a room
+	public void SpawnPlayer() {
+		//prepare instantiation data for the viking: Randomly diable the axe and/or shield
+		bool[] enabledRenderers = new bool[2];
+		//enabledRenderers[0] = Random.Range(0,2)==0;//Axe
+		//enabledRenderers[1] = Random.Range(0, 2) == 0; ;//Shield
+		
+		object[] objs = new object[1]; // Put our bool data in an object array, to send
+		objs[0] = enabledRenderers;
+		//
+		//Everything above this line in this function isnt needed, just put in for simplicity, definitely change later
+
+
+		// Spawn our local player
+		PhotonNetwork.Instantiate(this.playerPrefabName, game.getSpawn(), Quaternion.identity, 0, objs);
+	}
+
+	public void RespawnPlayer() { //callable from other scripts to start respawn coroutine
+		StartCoroutine("respawn");
+	}
+
+	IEnumerator respawn() { //helper to respawnplayer
+		yield return new WaitForSeconds(respawnTimer);
+		SpawnPlayer();
+	}
+
+	void OnGUI()
+	{
+		if (PhotonNetwork.room == null) return; //Only display this GUI when inside a room
 
         if (GUILayout.Button("Leave Room"))
         {
