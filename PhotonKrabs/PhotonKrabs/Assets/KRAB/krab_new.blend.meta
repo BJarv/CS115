@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 417ff0580eccd0a479fbd3dadaf63579
+guid: f5375b6c1cec7cc4486ce441b03067bd
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -42,10 +42,7 @@ ModelImporter:
     7400006: attack_one_side
     7400008: jump
     7400010: movement
-    7400012: jump_faster
-    7400014: run
     9500000: //RootNode
-    11100000: //RootNode
     13700000: Cube_006
   materials:
     importMaterials: 1
@@ -98,6 +95,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   additionalBone: 0
   userData: 
