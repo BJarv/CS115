@@ -100,8 +100,8 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
 
         //disable the axe and shield meshrenderers based on the instantiate data
         MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
-        rens[0].enabled = mybools[0];//Axe
-        rens[1].enabled = mybools[1];//Shield
+        //rens[0].enabled = mybools[0];//Axe
+        //rens[1].enabled = mybools[1];//Shield
 
     }
 
