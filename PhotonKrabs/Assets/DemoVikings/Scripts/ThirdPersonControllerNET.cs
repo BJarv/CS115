@@ -11,7 +11,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 
 	public Rigidbody target;
 		// The object we're steering
-	public float speed = 1.0f, walkSpeedDownscale = 2.0f, turnSpeed = 2.0f, mouseTurnSpeed = 0.3f, jumpSpeed = 1.0f;
+	public float speed = 4.0f, walkSpeedDownscale = 1.0f, turnSpeed = 0.0f, mouseTurnSpeed = 0.3f, jumpSpeed = 1.0f;
 		// Tweak to ajust character responsiveness
 	public LayerMask groundLayers = -1;
 		// Which layers should be walkable?
@@ -102,7 +102,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			Fire1 ();
 		}
 
-		float rotationAmount;
+		/*float rotationAmount;
 		
 		if (Input.GetMouseButton (1) && (!requireLock || controlLock || Screen.lockCursor))
 		// If the right mouse button is held, rotation is locked to the mouse
@@ -124,12 +124,12 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			rotationAmount = Input.GetAxis ("Horizontal") * turnSpeed * Time.deltaTime;
 		}
 		
-		target.transform.RotateAround (target.transform.up, rotationAmount);
+		target.transform.RotateAround (target.transform.up, rotationAmount);*/
 		
-		if (Input.GetKeyDown(KeyCode.Backslash) || Input.GetKeyDown(KeyCode.Plus))
-		{
-			walking = !walking;
-		}
+		//if (Input.GetKeyDown(KeyCode.Backslash) || Input.GetKeyDown(KeyCode.Plus))
+		//{
+		//	walking = !walking;
+		//}
 	}
 	
 	
@@ -138,18 +138,19 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	{
 		get
 		{
-			if (Input.GetMouseButton (1))
-			{
-				float sidestep = -(Input.GetKey(KeyCode.Q)?1:0) + (Input.GetKey(KeyCode.E)?1:0);
-                float horizontal = Input.GetAxis ("Horizontal");
-				
-				return Mathf.Abs (sidestep) > Mathf.Abs (horizontal) ? sidestep : horizontal;
-			}
-			else
-			{
-                float sidestep = -(Input.GetKey(KeyCode.Q) ? 1 : 0) + (Input.GetKey(KeyCode.E) ? 1 : 0);
-                return sidestep;
-			}
+			//if (Input.GetMouseButton (1))
+			//{
+			//	float sidestep = -(Input.GetKey(KeyCode.Q)?1:0) + (Input.GetKey(KeyCode.E)?1:0);
+            //    float horizontal = Input.GetAxis ("Horizontal");
+			//	
+			//	return Mathf.Abs (sidestep) > Mathf.Abs (horizontal) ? sidestep : horizontal;
+			//}
+			//else
+			//{
+            //float sidestep = -(Input.GetKey(KeyCode.Q) ? 1 : 0) + (Input.GetKey(KeyCode.E) ? 1 : 0);
+			float sidestep = Input.GetAxis("Horizontal");
+            return sidestep;
+			//}
 		}
 	}
 	
@@ -199,11 +200,11 @@ public class ThirdPersonControllerNET : MonoBehaviour
 				float appliedSpeed = walking ? speed / walkSpeedDownscale : speed;
 					// Scale down applied speed if in walk mode
 				
-				if (Input.GetAxis ("Vertical") < 0.0f)
+				//if (Input.GetAxis ("Vertical") < 0.0f)
 				// Scale down applied speed if walking backwards
-				{
-					appliedSpeed /= walkSpeedDownscale;
-				}
+				//{
+				//	appliedSpeed /= walkSpeedDownscale;
+				//}
 
 				if (movement.magnitude > inputThreshold)
 				// Only apply movement if we have sufficient input

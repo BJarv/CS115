@@ -8,7 +8,7 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
     ThirdPersonControllerNET controllerScript;
     private bool appliedInitialUpdate;
 	public Camera cam;
-	public GameManagerVik gameMan;
+	GameManagerVik gameMan;
 
     void Awake()
     {
