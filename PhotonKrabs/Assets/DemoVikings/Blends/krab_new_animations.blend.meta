@@ -48,6 +48,7 @@ ModelImporter:
     7400018: one_hand_Loren_001
     7400020: two_hand_Loren
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Cube_006
   materials:
     importMaterials: 1
@@ -64,7 +65,645 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: ArmatureAction
+      takeName: ArmatureAction
+      firstFrame: -1
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: attack_both_hand
+      takeName: attack_both_hand
+      firstFrame: -1
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: attack_one_hand
+      takeName: attack_one_hand
+      firstFrame: -1
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: attack_one_side
+      takeName: attack_one_side
+      firstFrame: -1
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: jump
+      takeName: jump
+      firstFrame: -1
+      lastFrame: 59
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: move_Loren
+      takeName: move_Loren
+      firstFrame: 0
+      lastFrame: 59.0000038
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: move_loren
+      takeName: move_loren
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: movement
+      takeName: movement
+      firstFrame: -1
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: one_hand_Loren_001
+      takeName: one_hand_Loren_001
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: two_hand_Loren
+      takeName: two_hand_Loren
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/jetpack
+        weight: 1
+      - path: Armature/Root/jetpack/jetpack_002
+        weight: 1
+      - path: Armature/Root/shoulder_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_big_l
+        weight: 1
+      - path: Armature/Root/shoulder_l/bicep_l/arm_l/claw_small_l
+        weight: 1
+      - path: Armature/Root/shoulder_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r
+        weight: 1
+      - path: Armature/Root/shoulder_r/bicep_r/arm_r/claw_small_r
+        weight: 1
+      - path: Cube_006
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -100,6 +739,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 

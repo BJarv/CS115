@@ -116,7 +116,7 @@ public class AnimationController : MonoBehaviour
 		canLand = false;
 		state = CharacterState.Jumping;
 		
-		Invoke ("Fall", target["Jump"].length);
+		Invoke ("Fall", target["jump"].length);
 	}
 	
 	
@@ -176,6 +176,14 @@ public class AnimationController : MonoBehaviour
 	void Update ()
 	// Animation control
 	{
+
+		if (Input.GetMouseButtonDown (0)) {
+			target.CrossFade ("one_hand_Loren_001");
+		}
+		if (Input.GetMouseButtonDown (1)) {
+			target.CrossFade ("two_hand_Loren");
+		}
+
 		switch (state)
 		{
 			case CharacterState.Normal:
@@ -186,17 +194,18 @@ public class AnimationController : MonoBehaviour
 					if (Vector3.Angle (lastRootForward, root.forward) > 1.0f)
 					// If the character has rotated on the spot, shuffle his feet a bit
 					{
-						target.CrossFade ("Shuffle");
+						target.CrossFade ("move_Loren");
 						
 						lastRootForward = Vector3.Slerp (lastRootForward, root.forward, Time.deltaTime * shuffleSpeed);
 					}
 					else
 					{
-						target.CrossFade ("Idle");
+						target.CrossFade ("move_Loren");
 					}
 				}
 				else
 				{
+					//target.CrossFade ("move_Loren");
 					target["Walk"].speed = target["Run"].speed =
 						Vector3.Angle (root.forward, movement) > 91.0f ? -1.0f : 1.0f;
 						// If the direction if backwards, play the animations backwards
@@ -214,7 +223,7 @@ public class AnimationController : MonoBehaviour
 				}
 			break;
 			case CharacterState.Jumping:
-				target.CrossFade ("Jump");
+				target.CrossFade ("jump");
 			break;
 			case CharacterState.Falling:
 				//target.CrossFade ("Fall");
