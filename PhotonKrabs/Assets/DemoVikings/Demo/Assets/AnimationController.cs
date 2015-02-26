@@ -126,11 +126,11 @@ public class AnimationController : MonoBehaviour
 		canLand = false;
 		state = CharacterState.Landing;
 		
-		Invoke (
-			"Land",
-			target["Land"].length * (HorizontalMovement.magnitude < walkSpeed ? 1.0f : runningLandingFactor)
+		//Invoke (
+			//"Land",
+			//target["Land"].length * (HorizontalMovement.magnitude < walkSpeed ? 1.0f : runningLandingFactor)
 				// Land quicker if we're moving enough horizontally to start walking after landing
-		);
+		//);
 	}
 	
 	
@@ -217,10 +217,10 @@ public class AnimationController : MonoBehaviour
 				target.CrossFade ("Jump");
 			break;
 			case CharacterState.Falling:
-				target.CrossFade ("Fall");
+				//target.CrossFade ("Fall");
 			break;
 			case CharacterState.Landing:
-				target.CrossFade ("Land");
+				//target.CrossFade ("Land");
 			break;
 		}
 	}
