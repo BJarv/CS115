@@ -19,10 +19,12 @@ public class InAttackRange : MonoBehaviour {
 		Debug.Log ("in raycheck");
 		RaycastHit hit;
 		if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, rayDist, enemies)) {
-			Debug.Log("hit a player in raycheck");
-			colliding = true;
-			//colWith = hit.collider;
-			Instantiate(sphere, hit.point, Quaternion.identity);
+			if(hit.transform.gameObject.name != transform.parent.transform.parent.gameObject.name) { //make sure you didnt hit yourself.
+				Debug.Log("hit a player in raycheck");
+				colliding = true;
+				//colWith = hit.collider;
+				Instantiate(sphere, hit.point, Quaternion.identity);
+			}
 		} else {
 			colliding = false;
 			//colWith = null;
