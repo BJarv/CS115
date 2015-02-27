@@ -116,7 +116,7 @@ public class AnimationController : MonoBehaviour
 		canLand = false;
 		state = CharacterState.Jumping;
 		
-		Invoke ("Fall", target["jump"].length);
+		Invoke ("Fall", target["jump_Loren"].length);
 	}
 	
 	
@@ -177,11 +177,11 @@ public class AnimationController : MonoBehaviour
 	// Animation control
 	{
 
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (1)) {
 			target.CrossFade ("one_hand_Loren_001");
 		}
-		if (Input.GetMouseButtonDown (1)) {
-			target.CrossFade ("two_hand_Loren");
+		if (Input.GetMouseButtonDown (0)) {
+			target.CrossFade ("two_hand_Loren_new");
 		}
 
 		switch (state)
@@ -223,7 +223,7 @@ public class AnimationController : MonoBehaviour
 				}
 			break;
 			case CharacterState.Jumping:
-				target.CrossFade ("jump");
+				target.CrossFade ("jump_Loren");
 			break;
 			case CharacterState.Falling:
 				//target.CrossFade ("Fall");
