@@ -88,7 +88,9 @@ public class ThirdPersonCameraNET : MonoBehaviour
 			enabled = false;
 			return;
 		}
-		
+
+		camera.transform.localPosition = new Vector3(0f, .23f, 0f); //SET CAMERA POSITION
+
 		lastStationaryPosition = target.transform.position;
 		targetDistance = optimalDistance = (camera.transform.position - target.transform.position).magnitude;
 	}
@@ -188,11 +190,11 @@ public class ThirdPersonCameraNET : MonoBehaviour
 			if (new Vector2 (movement.x, movement.z).magnitude > movementThreshold)
 			// Only update follow camera if we moved sufficiently
 			{
-				FollowUpdate ();
+				//FollowUpdate ();
 			}
 		}
 		
-		DistanceUpdate ();
+		//DistanceUpdate ();
 	}
 	
 	
@@ -226,56 +228,56 @@ public class ThirdPersonCameraNET : MonoBehaviour
 	void FreeUpdate ()
 	// Control the camera via the mouse
 	{
-		float rotationAmount;
+		//float rotationAmount;
 		
 		// Horizontal rotation:
 		
-		if (Input.GetMouseButton (1))
+		//if (Input.GetMouseButton (1))
 		// If right mouse button is held, don't rotate horizontally - the character should do that
-		{
-			FollowUpdate ();
-		}
-		else
+		//{
+		//	FollowUpdate ();
+		//}
+		//else
 		// If left mouse button it held, do horizontal rotation
-		{
-			rotationAmount = Input.GetAxis ("Mouse X") * rotationUpdateSpeed * Time.deltaTime;
-			camera.transform.RotateAround (target.transform.position, Vector3.up, rotationAmount);
-		}
+		//{
+		//	rotationAmount = Input.GetAxis ("Mouse X") * rotationUpdateSpeed * Time.deltaTime;
+		//	camera.transform.RotateAround (target.transform.position, Vector3.up, rotationAmount);
+		//}
 		
 		// Vertical rotation:
 		
-		rotationAmount = Input.GetAxis ("Mouse Y") * -1.0f * lookUpSpeed * Time.deltaTime;
+		//rotationAmount = Input.GetAxis ("Mouse Y") * -1.0f * lookUpSpeed * Time.deltaTime;
 			// Calculate vertical rotation
 		
-		bool lookFromBelow = Vector3.Angle (camera.transform.forward, target.transform.up * -1) >
-			Vector3.Angle (camera.transform.forward, target.transform.up);
+		//bool lookFromBelow = Vector3.Angle (camera.transform.forward, target.transform.up * -1) >
+		//	Vector3.Angle (camera.transform.forward, target.transform.up);
 			// Is the camera looking up at the target?
 		
-		if (grounded &&	lookFromBelow)
+		//if (grounded &&	lookFromBelow)
 		// If we're grounded and look up from this position - applying the vertical rotation to the camera pivot point
-		{
-			camera.transform.RotateAround (camera.transform.position, camera.transform.right, rotationAmount);
-		}
-		else
+		//{
+		//	camera.transform.RotateAround (camera.transform.position, camera.transform.right, rotationAmount);
+		//}
+		//else
 		// If we're not grounded, apply the vertical rotation to the target pivot point
-		{
-			camera.transform.RotateAround (target.transform.position, camera.transform.right, rotationAmount);
-			camera.transform.LookAt (target.transform.position);
+		//{
+		//	camera.transform.RotateAround (target.transform.position, camera.transform.right, rotationAmount);
+		//	camera.transform.LookAt (target.transform.position);
 				// Apply rotation and keep looking at the target
 			
-			float forwardAngle = Vector3.Angle (target.transform.forward, SnappedCameraForward);
+		//	float forwardAngle = Vector3.Angle (target.transform.forward, SnappedCameraForward);
 				// Get the new rotation relative to the target forward vector
 			
-			if (forwardAngle > maxForwardAngle)
+		//	if (forwardAngle > maxForwardAngle)
 			// If the new rotation brought the camera over the clamp max, rotate it back by the difference
-			{
-				camera.transform.RotateAround (
-					target.transform.position,
-					camera.transform.right,
-					lookFromBelow ? forwardAngle - maxForwardAngle : maxForwardAngle - forwardAngle
-				);
-			}
-		}
+		//	{
+		//		camera.transform.RotateAround (
+		//			target.transform.position,
+		//			camera.transform.right,
+		//			lookFromBelow ? forwardAngle - maxForwardAngle : maxForwardAngle - forwardAngle
+		//		);
+		//	}
+		//}
 	}
 	
 	
@@ -299,7 +301,7 @@ public class ThirdPersonCameraNET : MonoBehaviour
 		Gizmos.DrawLine (target.transform.position, target.transform.position + target.transform.forward);
 			// Visualise the target forward vector
 		
-		Gizmos.color = grounded ? Color.blue : Color.red;
+		//Gizmos.color = grounded ? Color.blue : Color.red;
 		Gizmos.DrawLine (camera.transform.position + target.transform.up * -groundedCheckOffset,
 			camera.transform.position + target.transform.up * -(groundedCheckOffset + groundedDistance));
 			// Visualise the camera grounded check and whether or not it is grounded

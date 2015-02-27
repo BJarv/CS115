@@ -165,6 +165,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			groundedDistance,
 			groundLayers
 		);
+		Debug.Log (grounded);
 			// Shoot a ray downward to see if we're touching the ground
 
         if (isRemotePlayer) return;
