@@ -4,6 +4,9 @@ using System.Collections;
 [RequireComponent (typeof (ThirdPersonControllerNET))]
 public class AnimationController : MonoBehaviour
 {
+	public AudioClip attack_audio;
+	public AudioClip dash_audio;
+	public AudioClip jump_audio;
 	enum CharacterState
 	{
 		Normal,
@@ -72,6 +75,7 @@ public class AnimationController : MonoBehaviour
 	void Start ()
 	// Verify setup, configure
 	{
+		target ["two_hand_Loren_new"].time = 2;
 		Setup ();
 			// Retry setup if references were cleared post-add
 			
@@ -177,13 +181,18 @@ public class AnimationController : MonoBehaviour
 	// Animation control
 	{
 
-		if(GetComponent<ThirdPersonControllerNET>().attackable()) {
+		if (GetComponent<ThirdPersonControllerNET> ().attackable ()) {
 			if (Input.GetMouseButtonDown (1)) {
 				target.CrossFade ("one_hand_Loren_001");
+				AudioSource.PlayClipAtPoint (dash_audio, transform.position);
 			}
 			if (Input.GetMouseButtonDown (0)) {
 				target.CrossFade ("two_hand_Loren_new");
+				AudioSource.PlayClipAtPoint (attack_audio, transform.position);
 			}
+		}
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			AudioSource.PlayClipAtPoint (jump_audio, transform.position);
 		}
 		switch (state)
 		{
