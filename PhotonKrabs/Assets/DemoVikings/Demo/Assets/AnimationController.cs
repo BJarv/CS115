@@ -180,15 +180,16 @@ public class AnimationController : MonoBehaviour
 	// Animation control
 	{
 
-		if (Input.GetMouseButtonDown (1)) {
-			target.CrossFade ("one_hand_Loren_001");
-			AudioSource.PlayClipAtPoint(dash_audio, transform.position);
+		if (GetComponent<ThirdPersonControllerNET> ().attackable ()) {
+			if (Input.GetMouseButtonDown (1)) {
+				target.CrossFade ("one_hand_Loren_001");
+				AudioSource.PlayClipAtPoint (dash_audio, transform.position);
+			}
+			if (Input.GetMouseButtonDown (0)) {
+				target.CrossFade ("two_hand_Loren_new");
+				AudioSource.PlayClipAtPoint (attack_audio, transform.position);
+			}
 		}
-		if (Input.GetMouseButtonDown (0)) {
-			target.CrossFade ("two_hand_Loren_new");
-			AudioSource.PlayClipAtPoint(attack_audio, transform.position);
-		}
-		//space pressed
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			AudioSource.PlayClipAtPoint (jump_audio, transform.position);
 		}
