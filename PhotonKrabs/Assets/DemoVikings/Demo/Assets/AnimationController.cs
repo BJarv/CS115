@@ -177,13 +177,14 @@ public class AnimationController : MonoBehaviour
 	// Animation control
 	{
 
-		if (Input.GetMouseButtonDown (1)) {
-			target.CrossFade ("one_hand_Loren_001");
+		if(GetComponent<ThirdPersonControllerNET>().attackable()) {
+			if (Input.GetMouseButtonDown (1)) {
+				target.CrossFade ("one_hand_Loren_001");
+			}
+			if (Input.GetMouseButtonDown (0)) {
+				target.CrossFade ("two_hand_Loren_new");
+			}
 		}
-		if (Input.GetMouseButtonDown (0)) {
-			target.CrossFade ("two_hand_Loren_new");
-		}
-
 		switch (state)
 		{
 			case CharacterState.Normal:

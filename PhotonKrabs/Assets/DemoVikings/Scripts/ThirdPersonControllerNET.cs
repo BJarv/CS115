@@ -6,8 +6,17 @@ public delegate void JumpDelegate ();
 public class ThirdPersonControllerNET : MonoBehaviour
 {
 	bool fire1OnCD = false;
-	float fire1CD = 1f;
+	bool fire2OnCD = false;
+	public float fire1CD = 1f;
+	public float fire2CD = 2f;
+	public float dashTime = .7f;
+	bool killingOther = false;
+	bool dashing = false;
+	GameObject cam;
+
+
 	public InAttackRange range;
+	public Vector3 dashPower;
 
 	public Rigidbody target;
 		// The object we're steering
@@ -85,6 +94,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			return;
 		}
 		range = transform.Find ("Camera/AttackRange").GetComponent<InAttackRange>();
+		cam = transform.Find("Camera").gameObject;
 		target.freezeRotation = true;
 			// We will be controlling the rotation of the target, so we tell the physics system to leave it be
 		walking = false;
@@ -96,40 +106,25 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	{
         if (isRemotePlayer) return;
 
-		if(Input.GetMouseButtonDown(0) && attackable()) {
-			fire1OnCD = true;
-			StartCoroutine("fire1OffCD");
-			Fire1 ();
+		if(attackable ()) {
+			if(Input.GetMouseButtonDown(0)) {
+				fire1OnCD = true;
+				StartCoroutine("fire1OffCD");
+				Fire1 ();
+			} else if (Input.GetMouseButtonDown (1)) {
+				fire2OnCD = true;
+				StartCoroutine ("fire2OffCD");
+				Fire2();
+			}
+		}
+		if(dashing && !killingOther) {
+			RaycastHit hit = range.sphereCheck();
+			if(range.colliding && hit.collider.tag == "Player") {
+				killingOther = true;
+				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f);
+			}
 		}
 
-		/*float rotationAmount;
-		
-		if (Input.GetMouseButton (1) && (!requireLock || controlLock || Screen.lockCursor))
-		// If the right mouse button is held, rotation is locked to the mouse
-		{
-			if (controlLock)
-			{
-				Screen.lockCursor = true;
-			}
-			
-			rotationAmount = Input.GetAxis ("Mouse X") * mouseTurnSpeed * Time.deltaTime;
-		}
-		else
-		{
-			if (controlLock)
-			{
-				Screen.lockCursor = false;
-			}
-			
-			rotationAmount = Input.GetAxis ("Horizontal") * turnSpeed * Time.deltaTime;
-		}
-		
-		target.transform.RotateAround (target.transform.up, rotationAmount);*/
-		
-		//if (Input.GetKeyDown(KeyCode.Backslash) || Input.GetKeyDown(KeyCode.Plus))
-		//{
-		//	walking = !walking;
-		//}
 	}
 	
 	
@@ -159,12 +154,12 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	// Handle movement here since physics will only be calculated in fixed frames anyway
 	{
       
-		grounded = Physics.Raycast (
+		grounded = (Physics.Raycast (
 			target.transform.position + target.transform.up * -groundedCheckOffset,
 			target.transform.up * -1,
 			groundedDistance,
 			groundLayers
-		);
+		) && !dashing);
 		Debug.Log (grounded);
 			// Shoot a ray downward to see if we're touching the ground
 
@@ -243,8 +238,8 @@ public class ThirdPersonControllerNET : MonoBehaviour
 
 
 
-	bool attackable() {
-		if (fire1OnCD) { //add any cooldowns or other restrictions to attack here
+	public bool attackable() {
+		if (fire1OnCD || fire2OnCD) { //add any cooldowns or other restrictions to attack here
 			return false;
 		} else {
 			return true;
@@ -256,12 +251,23 @@ public class ThirdPersonControllerNET : MonoBehaviour
 		fire1OnCD = false;
 	}
 
+	IEnumerator fire2OffCD() {
+		yield return new WaitForSeconds(fire2CD);
+		fire2OnCD = false;
+	}
+
+	IEnumerator dashingOff() {
+		yield return new WaitForSeconds(dashTime);
+		dashing = false;
+		killingOther = false;
+	}
+
 
 	void Fire1() {
 		RaycastHit hit = range.rayCheck();
-		Debug.Log ("in fire1");
+		//Debug.Log ("in fire1");
 		if(range.colliding){ //something is in range
-			Debug.Log ("In colliding");
+			//Debug.Log ("In colliding");
 			
 			if(hit.collider.tag == "wall") { //object is wall
 				//play wall hit noise
@@ -269,7 +275,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 				
 			} else if(hit.collider.tag == "Player") { //if object hit is enemy
 				//play player hit noise
-				Debug.Log (hit.transform.gameObject.name + " about to take damage");
+				//Debug.Log (hit.transform.gameObject.name + " about to take damage");
 				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f);
 			}
 			
@@ -278,4 +284,15 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			//play wiff noise
 		}
 	}
+
+	void Fire2(){
+		dashing = true;
+		StartCoroutine("dashingOff");
+		rigidbody.velocity = Vector3.zero;
+		Vector3 dashForce = cam.transform.TransformDirection(Vector3.forward) * 1500f;
+		Debug.Log (dashForce);
+		rigidbody.AddForce (dashForce);
+
+	}
+
 }

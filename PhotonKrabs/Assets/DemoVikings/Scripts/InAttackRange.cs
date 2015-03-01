@@ -31,6 +31,21 @@ public class InAttackRange : MonoBehaviour {
 		}
 		return hit;
 	}
-	
+
+	public RaycastHit sphereCheck() { //IF PLAYER ISNT ATTACKING CHECK THIS FUNCTION?
+		RaycastHit hit;
+		if(Physics.SphereCast(transform.position, 1f, transform.TransformDirection(Vector3.forward), out hit, rayDist, enemies)) {
+			if(hit.transform.gameObject.name != transform.parent.transform.parent.gameObject.name) { //make sure you didnt hit yourself.
+				Debug.Log("hit a player in raycheck");
+				colliding = true;
+				//colWith = hit.collider;
+				Instantiate(sphere, hit.point, Quaternion.identity);
+			}
+		} else {
+			colliding = false;
+			//colWith = null;
+		}
+		return hit;
+	}
 
 }
