@@ -75,6 +75,7 @@ public class AnimationController : MonoBehaviour
 	void Start ()
 	// Verify setup, configure
 	{
+		target ["two_hand_Loren_new"].time = 2;
 		Setup ();
 			// Retry setup if references were cleared post-add
 			
