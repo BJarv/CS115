@@ -15,4 +15,5 @@ public class Scoreboard : MonoBehaviour {
 		//	Debug.Log (PhotonNetwork.otherPlayers[i].name); //other players names
 		//}
 	}
+	
 }

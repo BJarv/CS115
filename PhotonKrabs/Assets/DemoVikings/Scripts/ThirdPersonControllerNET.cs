@@ -121,7 +121,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			RaycastHit hit = range.sphereCheck();
 			if(range.colliding && hit.collider.tag == "Player") {
 				killingOther = true;
-				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f);
+				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
 			}
 		}
 
@@ -160,7 +160,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			groundedDistance,
 			groundLayers
 		) && !dashing);
-		Debug.Log (grounded);
+		//Debug.Log (grounded);
 			// Shoot a ray downward to see if we're touching the ground
 
         if (isRemotePlayer) return;
@@ -276,7 +276,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			} else if(hit.collider.tag == "Player") { //if object hit is enemy
 				//play player hit noise
 				//Debug.Log (hit.transform.gameObject.name + " about to take damage");
-				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f);
+				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
 			}
 			
 		} else {
@@ -288,10 +288,10 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	void Fire2(){
 		dashing = true;
 		StartCoroutine("dashingOff");
-		rigidbody.velocity = Vector3.zero;
+		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		Vector3 dashForce = cam.transform.TransformDirection(Vector3.forward) * 1500f;
 		Debug.Log (dashForce);
-		rigidbody.AddForce (dashForce);
+		GetComponent<Rigidbody>().AddForce (dashForce);
 
 	}
 
