@@ -301,6 +301,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 
 	}
 
+
 	[RPC]
 	void incKill() { //increases kill count by 1, for deaths this is done in health.cs under takedamage
 		GetComponent<ThirdPersonNetworkVik>().kills++;
