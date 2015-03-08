@@ -12,7 +12,8 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	public float dashTime = .7f;
 	bool killingOther = false;
 	bool dashing = false;
-	GameObject cam;
+	public GameObject cam;
+	public bool isDead = false;
 
 
 	public InAttackRange range;
@@ -105,25 +106,28 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	// Handle rotation here to ensure smooth application.
 	{
         if (isRemotePlayer) return;
+		if(!isDead){
+			if(attackable ()) {
+				if(Input.GetMouseButtonDown(0)) {
+					fire1OnCD = true;
+					StartCoroutine("fire1OffCD");
+					Fire1 ();
+				} else if (Input.GetMouseButtonDown (1)) {
+					fire2OnCD = true;
+					StartCoroutine ("fire2OffCD");
+					Fire2();
+				}
+			}
+			if(dashing && !killingOther) {
+				RaycastHit hit = range.sphereCheck();
+				if(range.colliding && hit.collider.tag == "Player") {
+					killingOther = true;
+					GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
+					hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
+				}
+			}
+		}
 
-		if(attackable ()) {
-			if(Input.GetMouseButtonDown(0)) {
-				fire1OnCD = true;
-				StartCoroutine("fire1OffCD");
-				Fire1 ();
-			} else if (Input.GetMouseButtonDown (1)) {
-				fire2OnCD = true;
-				StartCoroutine ("fire2OffCD");
-				Fire2();
-			}
-		}
-		if(dashing && !killingOther) {
-			RaycastHit hit = range.sphereCheck();
-			if(range.colliding && hit.collider.tag == "Player") {
-				killingOther = true;
-				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
-			}
-		}
 
 	}
 	
@@ -166,7 +170,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
         if (isRemotePlayer) return;
 
 
-		if (grounded)
+		if (grounded && !isDead)
 		{
 			target.drag = groundDrag;
 				// Apply drag when we're grounded
@@ -276,6 +280,8 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			} else if(hit.collider.tag == "Player") { //if object hit is enemy
 				//play player hit noise
 				//Debug.Log (hit.transform.gameObject.name + " about to take damage");
+				GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
+
 				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
 			}
 			
@@ -293,6 +299,11 @@ public class ThirdPersonControllerNET : MonoBehaviour
 		Debug.Log (dashForce);
 		GetComponent<Rigidbody>().AddForce (dashForce);
 
+	}
+
+	[RPC]
+	void incKill() { //increases kill count by 1, for deaths this is done in health.cs under takedamage
+		GetComponent<ThirdPersonNetworkVik>().kills++;
 	}
 
 }

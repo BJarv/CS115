@@ -7,7 +7,7 @@ public class GameManagerVik : Photon.MonoBehaviour {
     // read the documentation for info how to spawn dynamically loaded game objects at runtime (not using Resources folders)
     public string playerPrefabName = "Charprefab";
 
-	Game game;
+	public Game game;
 	public float respawnTimer = 3f;
 	public GameObject mainCamObj;
 	public Camera mainCam;
@@ -62,12 +62,13 @@ public class GameManagerVik : Photon.MonoBehaviour {
 	}
 
 	public void RespawnPlayer() { //callable from other scripts to start respawn coroutine
-		StartCoroutine("respawn");
+		StartCoroutine("respawn"); //NO LONGER USED, NEW RESPAWN IN HEALTH SCRIPT
 	}
 
 	IEnumerator respawn() { //helper to respawnplayer
 		yield return new WaitForSeconds(respawnTimer);
 		SpawnPlayer();
+
 	}
 
 	void OnGUI()
