@@ -4,7 +4,7 @@ using System.Collections;
 public class MainMenuKrabs : MonoBehaviour
 {
 	public GameObject menu;
-
+	public Material [] krab_colors;
 
 
     void Awake()
@@ -45,6 +45,11 @@ public class MainMenuKrabs : MonoBehaviour
 		roomName = createRoom;
 		//Debug.Log (roomName);
 	}
+
+	public void changeColor (int color) {
+		GameObject.Find ("krab_new_animations/Cube_006").GetComponent<SkinnedMeshRenderer> ().materials[0] = krab_colors[0];
+	}
+
 	public void createRoom(int create){
 		if (create == 1){
 		PhotonNetwork.CreateRoom(roomName, new RoomOptions() { maxPlayers = 10 }, TypedLobby.Default);
