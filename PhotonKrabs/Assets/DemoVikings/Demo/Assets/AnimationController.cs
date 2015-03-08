@@ -186,9 +186,11 @@ public class AnimationController : MonoBehaviour
 				target.CrossFade ("one_hand_Loren_001");
 				AudioSource.PlayClipAtPoint (dash_audio, transform.position);
 			}
+			//left click
 			if (Input.GetMouseButtonDown (0)) {
 				target.CrossFade ("two_hand_Loren_new");
 				AudioSource.PlayClipAtPoint (attack_audio, transform.position);
+				transform.Find ("ArmBlasterParticles").GetComponent<ParticleSystem>().Play();
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
