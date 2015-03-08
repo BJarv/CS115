@@ -288,10 +288,10 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	void Fire2(){
 		dashing = true;
 		StartCoroutine("dashingOff");
-		rigidbody.velocity = Vector3.zero;
+		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		Vector3 dashForce = cam.transform.TransformDirection(Vector3.forward) * 1500f;
 		Debug.Log (dashForce);
-		rigidbody.AddForce (dashForce);
+		GetComponent<Rigidbody>().AddForce (dashForce);
 
 	}
 
