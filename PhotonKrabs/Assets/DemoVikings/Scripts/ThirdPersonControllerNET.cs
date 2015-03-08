@@ -14,6 +14,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	bool dashing = false;
 	public GameObject cam;
 	public bool isDead = false;
+	public float parryStrength = 500f;
 
 
 	public InAttackRange range;
@@ -122,6 +123,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 				RaycastHit hit = range.sphereCheck();
 				if(range.colliding && hit.collider.tag == "Player") {
 					killingOther = true;
+					parryRecoilSelf(hit);
 					GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
 					hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
 				}
@@ -268,7 +270,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 
 
 	void Fire1() {
-		RaycastHit hit = range.rayCheck();
+		RaycastHit hit = range.sphereCheck();
 		//Debug.Log ("in fire1");
 		if(range.colliding){ //something is in range
 			//Debug.Log ("In colliding");
@@ -279,7 +281,6 @@ public class ThirdPersonControllerNET : MonoBehaviour
 				
 			} else if(hit.collider.tag == "Player") { //if object hit is enemy
 				//play player hit noise
-				//Debug.Log (hit.transform.gameObject.name + " about to take damage");
 				GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
 
 				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
@@ -296,11 +297,21 @@ public class ThirdPersonControllerNET : MonoBehaviour
 		StartCoroutine("dashingOff");
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		Vector3 dashForce = cam.transform.TransformDirection(Vector3.forward) * 1500f;
-		Debug.Log (dashForce);
+		//Debug.Log (dashForce);
 		GetComponent<Rigidbody>().AddForce (dashForce);
 
 	}
 
+	public void parryRecoilSelf(RaycastHit hit){
+		Vector3 parryForce = Vector3.Reflect(hit.point - transform.position, hit.normal); //get a vector that is perpendicular to the point we just hit
+		hit.collider.GetComponent<PhotonView>().RPC("parryRecoilOther", hit.collider.GetComponent<PhotonView>().owner, parryForce); //tell the other player to recoil in the opposite direction
+		GetComponent<Rigidbody>().AddForce(parryForce * parryStrength, ForceMode.Acceleration);
+	}
+
+	[RPC]
+	public void parryRecoilOther(Vector3 parryForce) { //NEEDS TESTING
+		GetComponent<Rigidbody>().AddForce (parryForce * parryStrength, ForceMode.Acceleration);
+	}
 
 	[RPC]
 	void incKill() { //increases kill count by 1, for deaths this is done in health.cs under takedamage
