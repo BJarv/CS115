@@ -185,12 +185,12 @@ public class AnimationController : MonoBehaviour
 			if (Input.GetMouseButtonDown (1)) {
 				target.CrossFade ("one_hand_Loren_001");
 				AudioSource.PlayClipAtPoint (dash_audio, transform.position);
+				//transform.Find ("Charprefab/krab_new_animations/Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r/ArmBlasterParticles").GetComponent<ParticleSystem>().Play();
 			}
 			//left click
 			if (Input.GetMouseButtonDown (0)) {
 				target.CrossFade ("two_hand_Loren_new");
 				AudioSource.PlayClipAtPoint (attack_audio, transform.position);
-				transform.Find ("ArmBlasterParticles").GetComponent<ParticleSystem>().Play();
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
