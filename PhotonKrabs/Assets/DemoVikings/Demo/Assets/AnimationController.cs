@@ -7,7 +7,7 @@ public class AnimationController : MonoBehaviour
 	public AudioClip attack_audio;
 	public AudioClip dash_audio;
 	public AudioClip jump_audio;
-	enum CharacterState
+	public enum CharacterState
 	{
 		Normal,
 		Jumping,
@@ -35,7 +35,7 @@ public class AnimationController : MonoBehaviour
 	
 	
 	private ThirdPersonControllerNET controller;
-	private CharacterState state = CharacterState.Falling;
+	public CharacterState state = CharacterState.Falling;
 	private bool canLand = true;
 	private float currentRotation;
 	private Vector3 lastRootForward;
