@@ -11,8 +11,10 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	public float fire2CD = 2f;
 	public float dashTime = .7f;
 	bool killingOther = false;
-	bool dashing = false;
-	GameObject cam;
+	public bool dashing = false;
+	public GameObject cam;
+	public bool isDead = false;
+	public float parryStrength = 500f;
 
 
 	public InAttackRange range;
@@ -105,25 +107,32 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	// Handle rotation here to ensure smooth application.
 	{
         if (isRemotePlayer) return;
+		if(!isDead){
+			if(attackable ()) {
+				if(Input.GetMouseButtonDown(0)) {
+					fire1OnCD = true;
+					StartCoroutine("fire1OffCD");
+					Fire1 ();
+				} else if (Input.GetMouseButtonDown (1)) {
+					fire2OnCD = true;
+					StartCoroutine ("fire2OffCD");
+					Fire2();
+				}
+			}
+			if(dashing && !killingOther) {
+				RaycastHit hit = range.sphereCheck();
+				if(range.colliding && hit.collider.tag == "Player") {
+					if(hit.collider.GetComponent<ThirdPersonControllerNET>().dashing) { //if the other player is also dashing, parry. may need a more 'networky' solution
+						parryRecoilSelf(hit);
+					} else { //otherwise kill player
+						killingOther = true;
+						GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
+						hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
+					}
+				}
+			}
+		}
 
-		if(attackable ()) {
-			if(Input.GetMouseButtonDown(0)) {
-				fire1OnCD = true;
-				StartCoroutine("fire1OffCD");
-				Fire1 ();
-			} else if (Input.GetMouseButtonDown (1)) {
-				fire2OnCD = true;
-				StartCoroutine ("fire2OffCD");
-				Fire2();
-			}
-		}
-		if(dashing && !killingOther) {
-			RaycastHit hit = range.sphereCheck();
-			if(range.colliding && hit.collider.tag == "Player") {
-				killingOther = true;
-				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f);
-			}
-		}
 
 	}
 	
@@ -160,13 +169,13 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			groundedDistance,
 			groundLayers
 		) && !dashing);
-		Debug.Log (grounded);
+		//Debug.Log (grounded);
 			// Shoot a ray downward to see if we're touching the ground
 
         if (isRemotePlayer) return;
 
 
-		if (grounded)
+		if (grounded && !isDead)
 		{
 			target.drag = groundDrag;
 				// Apply drag when we're grounded
@@ -264,7 +273,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 
 
 	void Fire1() {
-		RaycastHit hit = range.rayCheck();
+		RaycastHit hit = range.sphereCheck();
 		//Debug.Log ("in fire1");
 		if(range.colliding){ //something is in range
 			//Debug.Log ("In colliding");
@@ -275,8 +284,9 @@ public class ThirdPersonControllerNET : MonoBehaviour
 				
 			} else if(hit.collider.tag == "Player") { //if object hit is enemy
 				//play player hit noise
-				//Debug.Log (hit.transform.gameObject.name + " about to take damage");
-				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f);
+				GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
+
+				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
 			}
 			
 		} else {
@@ -290,9 +300,25 @@ public class ThirdPersonControllerNET : MonoBehaviour
 		StartCoroutine("dashingOff");
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		Vector3 dashForce = cam.transform.TransformDirection(Vector3.forward) * 1500f;
-		Debug.Log (dashForce);
+		//Debug.Log (dashForce);
 		GetComponent<Rigidbody>().AddForce (dashForce);
 
+	}
+
+	public void parryRecoilSelf(RaycastHit hit){
+		Vector3 parryForce = Vector3.Reflect(hit.point - transform.position, hit.normal); //get a vector that is perpendicular to the point we just hit
+		hit.collider.GetComponent<PhotonView>().RPC("parryRecoilOther", hit.collider.GetComponent<PhotonView>().owner, parryForce); //tell the other player to recoil in the opposite direction
+		GetComponent<Rigidbody>().AddForce(parryForce * parryStrength, ForceMode.Acceleration);
+	}
+
+	[RPC]
+	public void parryRecoilOther(Vector3 parryForce) { //NEEDS TESTING
+		GetComponent<Rigidbody>().AddForce (parryForce * parryStrength, ForceMode.Acceleration);
+	}
+
+	[RPC]
+	void incKill() { //increases kill count by 1, for deaths this is done in health.cs under takedamage
+		GetComponent<ThirdPersonNetworkVik>().kills++;
 	}
 
 }

@@ -9,6 +9,8 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
     private bool appliedInitialUpdate;
 	public Camera cam;
 	GameManagerVik gameMan;
+	public int kills = 0;
+	public int deaths = 0;
 
     void Awake()
     {
