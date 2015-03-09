@@ -4,11 +4,14 @@ using System.Collections;
 public class MainMenuKrabs : MonoBehaviour
 {
 	public GameObject menu;
-
+	public Texture[] textures;
+	public float changeInterval = 0.33F;
+	public Renderer rend;
 
 
     void Awake()
     {
+		rend = GetComponent<Renderer>();
         //PhotonNetwork.logLevel = NetworkLogLevel.Full;
 
         //Connect to the main photon server. This is the only IP and port we ever need to set(!)
@@ -53,7 +56,9 @@ public class MainMenuKrabs : MonoBehaviour
 		}
 
 	}
+	public void changeColor(int color){
 
+	}
 	void Update()
     {
         if (!PhotonNetwork.connected)
