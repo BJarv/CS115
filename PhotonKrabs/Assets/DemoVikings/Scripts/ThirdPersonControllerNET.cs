@@ -11,7 +11,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	public float fire2CD = 2f;
 	public float dashTime = .7f;
 	bool killingOther = false;
-	bool dashing = false;
+	public bool dashing = false;
 	public GameObject cam;
 	public bool isDead = false;
 	public float parryStrength = 500f;
@@ -122,10 +122,13 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			if(dashing && !killingOther) {
 				RaycastHit hit = range.sphereCheck();
 				if(range.colliding && hit.collider.tag == "Player") {
-					killingOther = true;
-					parryRecoilSelf(hit);
-					GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
-					hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
+					if(hit.collider.GetComponent<ThirdPersonControllerNET>().dashing) { //if the other player is also dashing, parry. may need a more 'networky' solution
+						parryRecoilSelf(hit);
+					} else { //otherwise kill player
+						killingOther = true;
+						GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
+						hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
+					}
 				}
 			}
 		}
