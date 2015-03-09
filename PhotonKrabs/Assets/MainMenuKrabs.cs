@@ -4,14 +4,12 @@ using System.Collections;
 public class MainMenuKrabs : MonoBehaviour
 {
 	public GameObject menu;
-<<<<<<< HEAD
+
 	public Texture[] textures;
 	public float changeInterval = 0.33F;
 	public Renderer rend;
-=======
-	public Material [] krab_colors;
->>>>>>> 1ec67c2f7f075531887fe943b1732eba685b8586
 
+	public Material [] krab_colors;
 
     void Awake()
     {
@@ -65,11 +63,8 @@ public class MainMenuKrabs : MonoBehaviour
 		}
 
 	}
-	public void changeColor(int color){
 
-	}
-	void Update()
-    {
+	void Update(){
         if (!PhotonNetwork.connected)
         {
             menu.SetActive(false);   //Wait for a connection
