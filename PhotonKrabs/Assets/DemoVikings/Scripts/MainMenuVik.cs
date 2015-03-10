@@ -5,6 +5,8 @@ public class MainMenuVik : MonoBehaviour
 {
 	public GameObject menu;
 
+	public GUIStyle krab_title;
+
     void Awake()
     {
         //PhotonNetwork.logLevel = NetworkLogLevel.Full;
@@ -24,6 +26,7 @@ public class MainMenuVik : MonoBehaviour
     private string roomName = "myRoom";
     private Vector2 scrollPos = Vector2.zero;
 
+
 	//void Update()
     void OnGUI()
     {
@@ -42,9 +45,11 @@ public class MainMenuVik : MonoBehaviour
 			//menu.SetActive(true);
 
 
-        GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 300) / 2, 400, 300));
+		GUI.color = Color.white;
+		GUI.Label (new Rect(Screen.width * 0.15f , Screen.height * 0.1f , Screen.width * 0.8f , Screen.height * 0.5f), "Krab Klashers", krab_title);
 
-        GUILayout.Label("Main Menu");
+        GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 200) / 2, 400, 300));
+
 
         //Player name
         GUILayout.BeginHorizontal();
@@ -94,6 +99,52 @@ public class MainMenuVik : MonoBehaviour
         }
         GUILayout.EndHorizontal();
 
+		//choose a color
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("CHOOSE COLOR:", GUILayout.Width(150));
+		GUI.color = Color.blue;
+		if (GUILayout.Button(""))
+		{
+
+			PlayerPrefs.SetInt("color", 0);
+		}
+		GUI.color = Color.green;
+		if (GUILayout.Button(""))
+		{
+
+			PlayerPrefs.SetInt("color", 1);
+		}
+		//GUILayout.EndHorizontal();
+
+		//GUILayout.BeginHorizontal();
+
+		//orange
+		GUI.color = new Color(1f, 0.50f, 0.016f, 1f);
+		if (GUILayout.Button(""))
+		{
+			PlayerPrefs.SetInt("color", 2);
+		}
+		GUI.color = Color.magenta;
+		if (GUILayout.Button(""))
+		{
+			PlayerPrefs.SetInt("color", 3);
+		}
+		GUI.color = Color.red;
+		if (GUILayout.Button(""))
+		{
+			PlayerPrefs.SetInt("color", 4);
+		}
+		GUI.color = Color.yellow;
+		if (GUILayout.Button(""))
+		{
+
+			PlayerPrefs.SetInt("color", 5);
+		}
+		GUILayout.EndHorizontal();
+
+
+
+		GUI.color = Color.white;
         GUILayout.Space(30);
         GUILayout.Label("ROOM LISTING:");
         if (PhotonNetwork.GetRoomList().Length == 0)
