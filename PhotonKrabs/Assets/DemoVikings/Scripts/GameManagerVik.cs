@@ -85,4 +85,5 @@ public class GameManagerVik : Photon.MonoBehaviour {
     {
         Debug.LogWarning("OnDisconnectedFromPhoton");
     }    
+	
 }

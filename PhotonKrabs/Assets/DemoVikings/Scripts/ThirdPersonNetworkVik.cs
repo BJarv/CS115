@@ -9,13 +9,16 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
     private bool appliedInitialUpdate;
 	public Camera cam;
 	GameManagerVik gameMan;
+	Game game;
 	public int kills = 0;
 	public int deaths = 0;
+
 
     void Awake()
     {
 		//cam = transform.Find("Camera").GetComponent<Camera>();
 		gameMan = GameObject.Find ("Code").GetComponent<GameManagerVik>();
+		game = gameMan.gameObject.GetComponent<Game>();
         cameraScript = GetComponent<ThirdPersonCameraNET>();
         controllerScript = GetComponent<ThirdPersonControllerNET>();
 
@@ -94,6 +97,12 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
         }
+		if(kills >= game.winKill) {
+			string winner = GetComponent<PhotonView>().name;
+			//Object[] winner = new Object[1];
+			//winner[0] = GetComponent<PhotonView>().name;
+			game.gameObject.GetComponent<PhotonView>().RPC ("gameover", PhotonTargets.All, winner);
+		}
     }
 
     void OnPhotonInstantiate(PhotonMessageInfo info)
