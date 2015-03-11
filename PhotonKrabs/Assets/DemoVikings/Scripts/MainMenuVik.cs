@@ -46,7 +46,7 @@ public class MainMenuVik : MonoBehaviour
 
 
 		GUI.color = Color.white;
-		GUI.Label (new Rect(Screen.width * 0.15f , Screen.height * 0.1f , Screen.width * 0.8f , Screen.height * 0.5f), "Krab Klashers", krab_title);
+		GUI.Label (new Rect(Screen.width * 0.05f , Screen.height * 0.1f , Screen.width * 0.8f , Screen.height * 0.5f), "Krab Klashers", krab_title);
 
         GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 200) / 2, 400, 300));
 
