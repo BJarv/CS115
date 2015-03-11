@@ -180,15 +180,19 @@ public class AnimationController : MonoBehaviour
 	void Update ()
 	// Animation control
 	{
-
+		if(!GetComponent<ThirdPersonControllerNET> ().dashing && Input.GetMouseButtonDown(0) && !GetComponent<ThirdPersonControllerNET> ().fire1OnCD) {
+			target.CrossFade ("one_hand_Loren_001");
+			AudioSource.PlayClipAtPoint (dash_audio, transform.position);
+		}
 
 		if (GetComponent<ThirdPersonControllerNET> ().attackable ()) {
-			if (Input.GetMouseButtonDown (1)) {
+			/*if (Input.GetMouseButtonDown (1)) {
 				target.CrossFade ("one_hand_Loren_001");
 				AudioSource.PlayClipAtPoint (dash_audio, transform.position);
 				//transform.Find ("Charprefab/krab_new_animations/Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r/ArmBlasterParticles").GetComponent<ParticleSystem>().Play();
-			}
-			else if (Input.GetMouseButtonDown (0)) {
+			}*/
+			//else 
+			if (Input.GetMouseButtonDown (0)) {
 				target.CrossFade ("two_hand_Loren_new");
 				AudioSource.PlayClipAtPoint (attack_audio, transform.position);
 			}

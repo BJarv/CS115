@@ -5,8 +5,8 @@ public delegate void JumpDelegate ();
 
 public class ThirdPersonControllerNET : MonoBehaviour
 {
-	bool fire1OnCD = false;
-	bool fire2OnCD = false;
+	public bool fire1OnCD = false;
+	public bool fire2OnCD = false;
 	public float fire1CD = 1f;
 	public float fire2CD = 2f;
 	public float dashTime = .7f;
@@ -108,7 +108,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	{
         if (isRemotePlayer) return;
 		if(!isDead){
-			if(!dashing && Input.GetMouseButtonDown(0)) { //allows to left click attack even if attack2 is on CD
+			if(!dashing && Input.GetMouseButtonDown(0) && !fire1OnCD) { //allows to left click attack even if attack2 is on CD
 				fire1OnCD = true;
 				StartCoroutine("fire1OffCD");
 				Fire1 ();
