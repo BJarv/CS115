@@ -120,7 +120,7 @@ public class AnimationController : MonoBehaviour
 		canLand = false;
 		state = CharacterState.Jumping;
 		
-		Invoke ("Fall", target["jump_Loren"].length);
+		//Invoke ("Fall", target["jump_Loren"].length);
 	}
 	
 	
@@ -236,7 +236,7 @@ public class AnimationController : MonoBehaviour
 				}
 			break;
 			case CharacterState.Jumping:
-				target.CrossFade ("jump_Loren");
+				//target.CrossFade ("jump_Loren");
 			break;
 			case CharacterState.Falling:
 				//target.CrossFade ("Fall");
