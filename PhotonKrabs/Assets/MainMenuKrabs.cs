@@ -52,7 +52,7 @@ public class MainMenuKrabs : MonoBehaviour
 	}
 
 	public void changeColor (int color) {
-		GameObject.Find ("krab_new_animations/Cube_006").GetComponent<SkinnedMeshRenderer> ().materials[0] = krab_colors[0];
+		GameObject.Find ("krab_death/Cube_006").GetComponent<SkinnedMeshRenderer> ().materials[0] = krab_colors[0];
 	}
 
 	public void createRoom(int create){
