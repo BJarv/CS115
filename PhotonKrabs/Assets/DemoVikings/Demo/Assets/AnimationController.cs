@@ -181,16 +181,18 @@ public class AnimationController : MonoBehaviour
 	// Animation control
 	{
 
+
 		if (GetComponent<ThirdPersonControllerNET> ().attackable ()) {
 			if (Input.GetMouseButtonDown (1)) {
 				target.CrossFade ("one_hand_Loren_001");
 				AudioSource.PlayClipAtPoint (dash_audio, transform.position);
 				//transform.Find ("Charprefab/krab_new_animations/Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r/ArmBlasterParticles").GetComponent<ParticleSystem>().Play();
 			}
-			if (Input.GetMouseButtonDown (0)) {
+			else if (Input.GetMouseButtonDown (0)) {
 				target.CrossFade ("two_hand_Loren_new");
 				AudioSource.PlayClipAtPoint (attack_audio, transform.position);
 			}
+			else target.CrossFade ("move_Loren");
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			AudioSource.PlayClipAtPoint (jump_audio, transform.position);
@@ -223,11 +225,11 @@ public class AnimationController : MonoBehaviour
 					
 					if (movement.magnitude < runSpeed)
 					{
-						target.CrossFade ("Walk");
+						target.CrossFade ("move_Loren");
 					}
 					else
 					{
-						target.CrossFade ("Run");
+						target.CrossFade ("move_Loren");
 					}
 					
 					lastRootForward = root.forward;
