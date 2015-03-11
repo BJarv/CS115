@@ -3,6 +3,8 @@ using System.Collections;
 
 public class booster : MonoBehaviour {
 
+	public float boost;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -16,7 +18,7 @@ public class booster : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if (col.tag == "Player") {
 			col.GetComponent<Rigidbody>().velocity = Vector3.zero;
-			Vector3 boostForce = transform.TransformDirection(Vector3.forward) * 15000f;
+			Vector3 boostForce = transform.TransformDirection(Vector3.forward) * boost;
 			Debug.Log (boostForce);
 			col.GetComponent<Rigidbody>().AddForce (boostForce);
 		}
