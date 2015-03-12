@@ -66,9 +66,5 @@ public class Scoreboard : MonoBehaviour {
 		GUILayout.EndHorizontal();
 	}
 
-	[RPC]
-	public void updateScore() {
-
-	}
 
 }

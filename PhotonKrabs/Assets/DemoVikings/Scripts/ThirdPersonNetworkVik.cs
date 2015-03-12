@@ -98,7 +98,7 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
         }
 		if(kills >= game.winKill) {
-			string winner = GetComponent<PhotonView>().name;
+			string winner = GetComponent<PhotonView>().owner.name;
 			//Object[] winner = new Object[1];
 			//winner[0] = GetComponent<PhotonView>().name;
 			game.gameObject.GetComponent<PhotonView>().RPC ("gameover", PhotonTargets.All, winner);

@@ -23,7 +23,9 @@ public class Game : MonoBehaviour {
 
 
 	public Vector3 getSpawn() {
-		return spawnPoints[Random.Range (0, spawnPoints.Length)].position;
+		Transform newspawn = spawnPoints[Random.Range (0, spawnPoints.Length)];
+		Debug.Log (newspawn.name);
+		return newspawn.position;
 	}
 
 	// Update is called once per frame

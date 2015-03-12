@@ -17,7 +17,7 @@ public class GameManagerVik : Photon.MonoBehaviour {
 	}
     void OnJoinedRoom()
     {
-
+		transform.Find ("BGCanvas").gameObject.SetActive(false);
         StartGame();
     }
     

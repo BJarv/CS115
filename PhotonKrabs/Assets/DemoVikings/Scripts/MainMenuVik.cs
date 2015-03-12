@@ -4,8 +4,10 @@ using System.Collections;
 public class MainMenuVik : MonoBehaviour
 {
 	public GameObject menu;
-
+	public GUISkin skin;
 	public GUIStyle krab_title;
+
+	public GameObject titleBG;
 
     void Awake()
     {
@@ -21,6 +23,7 @@ public class MainMenuVik : MonoBehaviour
         //Set camera clipping for nicer "main menu" background
         Camera.main.farClipPlane = Camera.main.nearClipPlane + 0.1f;
 
+		titleBG.SetActive(true);
     }
 
     private string roomName = "myRoom";
@@ -34,21 +37,25 @@ public class MainMenuVik : MonoBehaviour
         {
             ShowConnectingGUI();
 			return;
-            //menu.SetActive(false);   //Wait for a connection
+            //menu.SetActive(false); 
         }
 
 
-        if (PhotonNetwork.room != null)
+        if (PhotonNetwork.room != null) {
 			return;
-			//menu.SetActive(false); //Only when we're not in a Room
-		//else
-			//menu.SetActive(true);
+		} 
+
 
 
 		GUI.color = Color.white;
-		GUI.Label (new Rect(Screen.width * 0.05f , Screen.height * 0.1f , Screen.width * 0.8f , Screen.height * 0.5f), "Krab Klashers", krab_title);
+		GUI.skin = skin;
+		//GUI.Label (new Rect(Screen.width/2 , Screen.height * 0.1f , Screen.width * 0.8f , Screen.height * 0.5f), "Krab Klashers", krab_title);
 
-        GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 200) / 2, 400, 300));
+		if(GUI.Button (new Rect(20, 20, 100, 40), "Level Select")) {
+			Application.LoadLevel ("LevelSelect");
+		}
+
+        GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 200) / 2, 400, 300), skin.box);
 
 
         //Player name
@@ -68,6 +75,7 @@ public class MainMenuVik : MonoBehaviour
         roomName = GUILayout.TextField(roomName);
         if (GUILayout.Button("GO"))
         {
+
             PhotonNetwork.JoinRoom(roomName);
         }
         GUILayout.EndHorizontal();
@@ -105,7 +113,6 @@ public class MainMenuVik : MonoBehaviour
 		GUI.color = Color.blue;
 		if (GUILayout.Button(""))
 		{
-
 			PlayerPrefs.SetInt("color", 0);
 		}
 		GUI.color = Color.green;
