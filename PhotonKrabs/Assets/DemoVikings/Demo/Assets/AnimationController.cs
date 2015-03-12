@@ -183,10 +183,10 @@ public class AnimationController : MonoBehaviour
 
 		if(Input.GetMouseButtonDown(1) && !controller.fire2OnCD) {
 			target.CrossFade ("one_hand_Loren_001");
-			AudioSource.PlayClipAtPoint (dash_audio, transform.position);
+			//AudioSource.PlayClipAtPoint (dash_audio, transform.position);
 		} else if (Input.GetMouseButtonDown (0) && !controller.fire1OnCD) {
 			target.CrossFade ("two_hand_Loren_new");
-			AudioSource.PlayClipAtPoint (attack_audio, transform.position);
+			//AudioSource.PlayClipAtPoint (attack_audio, transform.position);
 		} else if(controller.attackable()) {
 			target.CrossFade ("move_Loren");
 		}

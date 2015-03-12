@@ -282,6 +282,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 
 	void Fire1() {
 		RaycastHit hit = range.sphereCheck();
+		AudioSource.PlayClipAtPoint (GetComponent<AnimationController>().attack_audio, transform.position);
 		//Debug.Log ("in fire1");
 		if(range.colliding){ //something is in range
 			//Debug.Log ("In colliding");
@@ -306,6 +307,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	void Fire2(){
 		dashing = true;
 		StartCoroutine("dashingOff");
+		AudioSource.PlayClipAtPoint (GetComponent<AnimationController>().dash_audio, transform.position);
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		Vector3 dashForce = cam.transform.TransformDirection(Vector3.forward) * dashPower;
 		//Debug.Log (dashForce);
