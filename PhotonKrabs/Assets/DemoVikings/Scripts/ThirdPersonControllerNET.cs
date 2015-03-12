@@ -15,7 +15,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	public GameObject cam;
 	public bool isDead = false;
 	public float parryStrength = 500f;
-	public float dashPower = 1500f;
+	public float dashPower = 3000f;
 
 
 	public InAttackRange range;
