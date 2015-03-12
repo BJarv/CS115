@@ -281,6 +281,8 @@ public class ThirdPersonControllerNET : MonoBehaviour
 
 
 	void Fire1() {
+		dashing = true;
+		StartCoroutine("dashingOff");
 		RaycastHit hit = range.sphereCheck();
 		AudioSource.PlayClipAtPoint (GetComponent<AnimationController>().attack_audio, transform.position);
 		//Debug.Log ("in fire1");

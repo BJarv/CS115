@@ -24,6 +24,7 @@ public class Health : MonoBehaviour {
 
 	void Die(string killerName) {
 		if(GetComponent<PhotonView>().isMine){
+			AudioSource.PlayClipAtPoint (GetComponent<AnimationController>().death_audio, transform.position);
 			Debug.Log ("in die");
 			chat.SendChat(killerName + " fragged " + PhotonNetwork.playerName + "!");
 			//PhotonNetwork.Destroy(gameObject);

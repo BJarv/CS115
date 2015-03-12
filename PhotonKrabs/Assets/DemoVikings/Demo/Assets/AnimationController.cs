@@ -7,6 +7,7 @@ public class AnimationController : MonoBehaviour
 	public AudioClip attack_audio;
 	public AudioClip dash_audio;
 	public AudioClip jump_audio;
+	public AudioClip death_audio;
 	public enum CharacterState
 	{
 		Normal,
