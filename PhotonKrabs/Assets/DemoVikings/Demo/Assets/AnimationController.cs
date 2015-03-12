@@ -7,7 +7,7 @@ public class AnimationController : MonoBehaviour
 	public AudioClip attack_audio;
 	public AudioClip dash_audio;
 	public AudioClip jump_audio;
-	enum CharacterState
+	public enum CharacterState
 	{
 		Normal,
 		Jumping,
@@ -35,7 +35,7 @@ public class AnimationController : MonoBehaviour
 	
 	
 	private ThirdPersonControllerNET controller;
-	private CharacterState state = CharacterState.Falling;
+	public CharacterState state = CharacterState.Falling;
 	private bool canLand = true;
 	private float currentRotation;
 	private Vector3 lastRootForward;
@@ -120,7 +120,7 @@ public class AnimationController : MonoBehaviour
 		canLand = false;
 		state = CharacterState.Jumping;
 		
-		Invoke ("Fall", target["jump_Loren"].length);
+		//Invoke ("Fall", target["jump_Loren"].length);
 	}
 	
 	
@@ -180,17 +180,23 @@ public class AnimationController : MonoBehaviour
 	void Update ()
 	// Animation control
 	{
+		if(!GetComponent<ThirdPersonControllerNET> ().dashing && Input.GetMouseButtonDown(1) && !GetComponent<ThirdPersonControllerNET> ().fire1OnCD) {
+			target.CrossFade ("one_hand_Loren_001");
+			AudioSource.PlayClipAtPoint (dash_audio, transform.position);
+		}
 
 		if (GetComponent<ThirdPersonControllerNET> ().attackable ()) {
-			if (Input.GetMouseButtonDown (1)) {
+			/*if (Input.GetMouseButtonDown (1)) {
 				target.CrossFade ("one_hand_Loren_001");
 				AudioSource.PlayClipAtPoint (dash_audio, transform.position);
 				//transform.Find ("Charprefab/krab_new_animations/Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r/ArmBlasterParticles").GetComponent<ParticleSystem>().Play();
-			}
+			}*/
+			//else 
 			if (Input.GetMouseButtonDown (0)) {
 				target.CrossFade ("two_hand_Loren_new");
 				AudioSource.PlayClipAtPoint (attack_audio, transform.position);
 			}
+			else target.CrossFade ("move_Loren");
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			AudioSource.PlayClipAtPoint (jump_audio, transform.position);
@@ -223,18 +229,18 @@ public class AnimationController : MonoBehaviour
 					
 					if (movement.magnitude < runSpeed)
 					{
-						target.CrossFade ("Walk");
+						target.CrossFade ("move_Loren");
 					}
 					else
 					{
-						target.CrossFade ("Run");
+						target.CrossFade ("move_Loren");
 					}
 					
 					lastRootForward = root.forward;
 				}
 			break;
 			case CharacterState.Jumping:
-				target.CrossFade ("jump_Loren");
+				//target.CrossFade ("jump_Loren");
 			break;
 			case CharacterState.Falling:
 				//target.CrossFade ("Fall");

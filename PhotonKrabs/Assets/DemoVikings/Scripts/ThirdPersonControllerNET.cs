@@ -5,8 +5,8 @@ public delegate void JumpDelegate ();
 
 public class ThirdPersonControllerNET : MonoBehaviour
 {
-	bool fire1OnCD = false;
-	bool fire2OnCD = false;
+	public bool fire1OnCD = false;
+	public bool fire2OnCD = false;
 	public float fire1CD = 1f;
 	public float fire2CD = 2f;
 	public float dashTime = .7f;
@@ -15,10 +15,10 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	public GameObject cam;
 	public bool isDead = false;
 	public float parryStrength = 500f;
+	public float dashPower = 1500f;
 
 
 	public InAttackRange range;
-	public Vector3 dashPower;
 
 	public Rigidbody target;
 		// The object we're steering
@@ -108,12 +108,19 @@ public class ThirdPersonControllerNET : MonoBehaviour
 	{
         if (isRemotePlayer) return;
 		if(!isDead){
+			if(!dashing && Input.GetMouseButtonDown(0) && !fire1OnCD) { //allows to left click attack even if attack2 is on CD
+				fire1OnCD = true;
+				StartCoroutine("fire1OffCD");
+				Fire1 ();
+			}
+
 			if(attackable ()) {
-				if(Input.GetMouseButtonDown(0)) {
+				/*if(Input.GetMouseButtonDown(0)) { //moved above
 					fire1OnCD = true;
 					StartCoroutine("fire1OffCD");
 					Fire1 ();
-				} else if (Input.GetMouseButtonDown (1)) {
+				} else */
+				if (Input.GetMouseButtonDown (1)) {
 					fire2OnCD = true;
 					StartCoroutine ("fire2OffCD");
 					Fire2();
@@ -299,7 +306,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 		dashing = true;
 		StartCoroutine("dashingOff");
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
-		Vector3 dashForce = cam.transform.TransformDirection(Vector3.forward) * 1500f;
+		Vector3 dashForce = cam.transform.TransformDirection(Vector3.forward) * dashPower;
 		//Debug.Log (dashForce);
 		GetComponent<Rigidbody>().AddForce (dashForce);
 

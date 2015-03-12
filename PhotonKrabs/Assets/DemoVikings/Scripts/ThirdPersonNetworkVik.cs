@@ -9,13 +9,16 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
     private bool appliedInitialUpdate;
 	public Camera cam;
 	GameManagerVik gameMan;
+	Game game;
 	public int kills = 0;
 	public int deaths = 0;
+
 
     void Awake()
     {
 		//cam = transform.Find("Camera").GetComponent<Camera>();
 		gameMan = GameObject.Find ("Code").GetComponent<GameManagerVik>();
+		game = gameMan.gameObject.GetComponent<Game>();
         cameraScript = GetComponent<ThirdPersonCameraNET>();
         controllerScript = GetComponent<ThirdPersonControllerNET>();
 
@@ -61,6 +64,7 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             stream.SendNext(GetComponent<Rigidbody>().velocity); 
+			stream.SendNext(controllerScript.dashing);
 
         }
         else
@@ -70,6 +74,7 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
             GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
+			controllerScript.dashing = (bool)stream.ReceiveNext();
 
             if (!appliedInitialUpdate)
             {
@@ -92,6 +97,12 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
         }
+		if(kills >= game.winKill) {
+			string winner = GetComponent<PhotonView>().owner.name;
+			//Object[] winner = new Object[1];
+			//winner[0] = GetComponent<PhotonView>().name;
+			game.gameObject.GetComponent<PhotonView>().RPC ("gameover", PhotonTargets.All, winner);
+		}
     }
 
     void OnPhotonInstantiate(PhotonMessageInfo info)
@@ -102,9 +113,9 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
 
         //disable the axe and shield meshrenderers based on the instantiate data
         MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
+		transform.Find ("krab_death/Cube_006").GetComponent<ColorSwitch> ().colorSwap (PlayerPrefs.GetInt ("color"));
         //rens[0].enabled = mybools[0];//Axe
         //rens[1].enabled = mybools[1];//Shield
-
     }
 
 }
