@@ -180,7 +180,7 @@ public class AnimationController : MonoBehaviour
 	void Update ()
 	// Animation control
 	{
-		if(!GetComponent<ThirdPersonControllerNET> ().dashing && Input.GetMouseButtonDown(1) && !GetComponent<ThirdPersonControllerNET> ().fire1OnCD) {
+		if(!GetComponent<ThirdPersonControllerNET> ().dashing && Input.GetMouseButtonDown(1) && !GetComponent<ThirdPersonControllerNET> ().fire2OnCD) {
 			target.CrossFade ("one_hand_Loren_001");
 			AudioSource.PlayClipAtPoint (dash_audio, transform.position);
 		}
@@ -198,7 +198,7 @@ public class AnimationController : MonoBehaviour
 			}
 			else target.CrossFade ("move_Loren");
 		}
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space) && GetComponent<ThirdPersonControllerNET> ().Grounded) {
 			AudioSource.PlayClipAtPoint (jump_audio, transform.position);
 		}
 		switch (state)
