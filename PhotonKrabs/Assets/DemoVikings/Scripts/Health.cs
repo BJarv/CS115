@@ -29,7 +29,7 @@ public class Health : MonoBehaviour {
 			//PhotonNetwork.Destroy(gameObject);
 			controller.isDead = true;
 			controller.cam.SetActive(false);
-			transform.position = new Vector3(-1000, -1000, -1000);
+			transform.position = new Vector3(1000f, 1000f, 1000f);
 			gameMan.mainCamObj.SetActive (true);
 			StartCoroutine("respawn");
 			//gameMan.RespawnPlayer();

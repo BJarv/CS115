@@ -100,6 +100,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 		target.freezeRotation = true;
 			// We will be controlling the rotation of the target, so we tell the physics system to leave it be
 		walking = false;
+		dashPower = 3000f;
 	}
 	
 	
