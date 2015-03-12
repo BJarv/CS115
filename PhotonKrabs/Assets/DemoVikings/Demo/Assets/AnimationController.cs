@@ -180,26 +180,18 @@ public class AnimationController : MonoBehaviour
 	void Update ()
 	// Animation control
 	{
-		if(!GetComponent<ThirdPersonControllerNET> ().dashing && Input.GetMouseButtonDown(1) && !GetComponent<ThirdPersonControllerNET> ().fire2OnCD) {
+
+		if(Input.GetMouseButtonDown(1) && !controller.fire2OnCD) {
 			target.CrossFade ("one_hand_Loren_001");
 			AudioSource.PlayClipAtPoint (dash_audio, transform.position);
+		} else if (Input.GetMouseButtonDown (0) && !controller.fire1OnCD) {
+			target.CrossFade ("two_hand_Loren_new");
+			AudioSource.PlayClipAtPoint (attack_audio, transform.position);
+		} else if(controller.attackable()) {
+			target.CrossFade ("move_Loren");
 		}
-
-		if (GetComponent<ThirdPersonControllerNET> ().attackable ()) {
-			/*if (Input.GetMouseButtonDown (1)) {
-				target.CrossFade ("one_hand_Loren_001");
-				AudioSource.PlayClipAtPoint (dash_audio, transform.position);
-				//transform.Find ("Charprefab/krab_new_animations/Armature/Root/shoulder_r/bicep_r/arm_r/claw_big_r/ArmBlasterParticles").GetComponent<ParticleSystem>().Play();
-			}*/
-			//else 
-			if (Input.GetMouseButtonDown (0)) {
-				target.CrossFade ("two_hand_Loren_new");
-				AudioSource.PlayClipAtPoint (attack_audio, transform.position);
-			}
-			else target.CrossFade ("move_Loren");
-		}
-		if (Input.GetKeyDown (KeyCode.Space) && GetComponent<ThirdPersonControllerNET> ().Grounded) {
-			AudioSource.PlayClipAtPoint (jump_audio, transform.position);
+		if (Input.GetKeyDown (KeyCode.Space) && controller.Grounded) {
+			//AudioSource.PlayClipAtPoint (jump_audio, transform.position);
 		}
 		switch (state)
 		{
