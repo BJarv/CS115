@@ -10,8 +10,8 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
 	public Camera cam;
 	GameManagerVik gameMan;
 	Game game;
-	public int kills = 0;
-	public int deaths = 0;
+	public int kills = 0; //should be switched over to customproperty on player
+	public int deaths = 0; //should be switched over to customproperty on player
 
 
     void Awake()
@@ -113,7 +113,9 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
 
         //disable the axe and shield meshrenderers based on the instantiate data
         MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
-		transform.Find ("krab_death/Cube_006").GetComponent<ColorSwitch> ().colorSwap (PlayerPrefs.GetInt ("color"));
+		ExitGames.Client.Photon.Hashtable color = new ExitGames.Client.Photon.Hashtable() {{"c", PlayerPrefs.GetInt ("color")}};
+		GetComponent<PhotonView> ().owner.SetCustomProperties(color);
+		//transform.Find ("krab_death/Cube_006").GetComponent<ColorSwitch> ().colorSwap (PlayerPrefs.GetInt ("color"));
         //rens[0].enabled = mybools[0];//Axe
         //rens[1].enabled = mybools[1];//Shield
     }

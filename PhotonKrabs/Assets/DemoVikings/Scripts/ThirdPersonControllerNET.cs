@@ -133,9 +133,13 @@ public class ThirdPersonControllerNET : MonoBehaviour
 					if(hit.collider.GetComponent<ThirdPersonControllerNET>().dashing) { //if the other player is also dashing, parry. may need a more 'networky' solution
 						parryRecoilSelf(hit);
 					} else { //otherwise kill player
-						killingOther = true;
-						GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
-						hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
+
+						if(!killingOther){
+							killingOther = true;
+							GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
+							hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
+						}
+
 					}
 				}
 			}
@@ -295,9 +299,9 @@ public class ThirdPersonControllerNET : MonoBehaviour
 				
 			} else if(hit.collider.tag == "Player") { //if object hit is enemy
 				//play player hit noise
-				GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
+				//GetComponent<PhotonView>().RPC ("incKill", PhotonTargets.AllBuffered);//kills++;
 
-				hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
+				//hit.transform.gameObject.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, 1f, PhotonNetwork.playerName);
 			}
 			
 		} else {

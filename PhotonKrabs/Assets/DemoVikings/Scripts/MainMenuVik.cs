@@ -87,11 +87,15 @@ public class MainMenuVik : MonoBehaviour
         if (GUILayout.Button("GO"))
         {
             // using null as TypedLobby parameter will also use the default lobby
-            PhotonNetwork.CreateRoom(roomName, new RoomOptions() { maxPlayers = 10 }, TypedLobby.Default);
+			//string currLevel = Application.loadedLevelName;
+			//ExitGames.Client.Photon.Hashtable nuCustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
+			//nuCustomRoomProperties.Add ("l", currLevel);
+			PhotonNetwork.CreateRoom(roomName, true, true, 10, new ExitGames.Client.Photon.Hashtable() {{"l", Application.loadedLevelName}}, new string[] {"l"});
+			//PhotonNetwork.CreateRoom(roomName, new RoomOptions() { maxPlayers = 10 }, TypedLobby.Default);
         }
         GUILayout.EndHorizontal();
 
-        //Join random room
+        /*//Join random room
         GUILayout.BeginHorizontal();
         GUILayout.Label("JOIN RANDOM ROOM:", GUILayout.Width(150));
         if (PhotonNetwork.GetRoomList().Length == 0)
@@ -105,7 +109,7 @@ public class MainMenuVik : MonoBehaviour
                 PhotonNetwork.JoinRandomRoom();
             }
         }
-        GUILayout.EndHorizontal();
+        GUILayout.EndHorizontal();*/
 
 		//choose a color
 		GUILayout.BeginHorizontal();
@@ -164,13 +168,17 @@ public class MainMenuVik : MonoBehaviour
             scrollPos = GUILayout.BeginScrollView(scrollPos);
             foreach (RoomInfo game in PhotonNetwork.GetRoomList())
             {
-                GUILayout.BeginHorizontal();
-                GUILayout.Label(game.name + " " + game.playerCount + "/" + game.maxPlayers);
-                if (GUILayout.Button("JOIN"))
-                {
-                    PhotonNetwork.JoinRoom(game.name);
-                }
-                GUILayout.EndHorizontal();
+				if(game.customProperties["l"].Equals(Application.loadedLevelName)){ //ensure client is on same level as host
+					GUILayout.BeginHorizontal();
+                	GUILayout.Label(game.name + " " + game.playerCount + "/" + game.maxPlayers);
+                	if (GUILayout.Button("JOIN"))
+                	{
+    	                PhotonNetwork.JoinRoom(game.name);
+	                }
+        	        GUILayout.EndHorizontal();
+				} else {
+					GUILayout.Label("..no games available..");
+				}
             }
             GUILayout.EndScrollView();
         }

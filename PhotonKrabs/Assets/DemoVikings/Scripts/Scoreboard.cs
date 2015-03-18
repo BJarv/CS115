@@ -55,12 +55,12 @@ public class Scoreboard : MonoBehaviour {
 
 		//kills
 		GUILayout.BeginVertical(GUILayout.Width(150));
-		GUILayout.Label (player.GetComponent<ThirdPersonNetworkVik>().kills.ToString(), GUILayout.Width(75));
+		GUILayout.Label (player.GetComponent<ThirdPersonNetworkVik>().kills.ToString(), GUILayout.Width(75)); //should be switched over to customproperty on player
 		GUILayout.EndVertical();
 
 		//deaths
 		GUILayout.BeginVertical(GUILayout.Width(150));
-		GUILayout.Label (player.GetComponent<ThirdPersonNetworkVik>().deaths.ToString(), GUILayout.Width(75));
+		GUILayout.Label (player.GetComponent<ThirdPersonNetworkVik>().deaths.ToString(), GUILayout.Width(75)); //should be switched over to customproperty on player
 		GUILayout.EndVertical();
 
 		GUILayout.EndHorizontal();
