@@ -28,7 +28,7 @@ public class ColorSwitch : MonoBehaviour {
 			GetComponent<SkinnedMeshRenderer> ().material = colors [colorIndex];
 		//}
 	}
-
+/* //color test
 	void OnGUI() {
 
 		GUILayout.BeginHorizontal();
@@ -78,5 +78,5 @@ public class ColorSwitch : MonoBehaviour {
 		}
 		GUILayout.EndHorizontal();
 	}
-
+*/
 }
