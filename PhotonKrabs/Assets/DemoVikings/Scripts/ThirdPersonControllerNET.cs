@@ -329,11 +329,13 @@ public class ThirdPersonControllerNET : MonoBehaviour
 
 	[RPC]
 	public void parryRecoilOther(Vector3 parryForce) { //NEEDS TESTING
-		GetComponent<Rigidbody>().AddForce (parryForce * parryStrength, ForceMode.Acceleration);
+		AudioSource.PlayClipAtPoint (GetComponent<AnimationController>().clash_audio, transform.position);
+		GetComponent<Rigidbody>().AddForce (-parryForce * parryStrength, ForceMode.Acceleration);
 	}
 
 	[RPC]
 	void incKill() { //increases kill count by 1, for deaths this is done in health.cs under takedamage
+		AudioSource.PlayClipAtPoint (GetComponent<AnimationController>().clash_audio, transform.position);
 		GetComponent<ThirdPersonNetworkVik>().kills++;
 	}
 
